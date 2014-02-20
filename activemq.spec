@@ -3,15 +3,15 @@
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 # 
 # wget https://raw.github.com/nmilford/rpm-activemq/master/activemq.spec -O ~/rpmbuild/SPECS/activemq.spec
-# wget http://apache.claz.org/activemq/apache-activemq/5.8.0/apache-activemq-5.8.0-bin.zip  -O ~/rpmbuild/SOURCES/apache-activemq-5.8.0-bin.zip
+# wget http://apache.claz.org/activemq/apache-activemq/5.9.0/apache-activemq-5.9.0-bin.zip  -O ~/rpmbuild/SOURCES/apache-activemq-5.8.0-bin.zip
 # wget https://raw.github.com/nmilford/rpm-activemq/master/activemq.init -O ~/rpmbuild/SOURCES/activemq.init
 # 
 # rpmbuild -bb ~/rpmbuild/SPECS/activemq.spec
 
 %define __jar_repack %{nil}
 %define amq_name activemq
-%define amq_branch 5.8
-%define amq_version 5.8.0
+%define amq_branch 5.9
+%define amq_version 5.9.0
 %define release_version 1
 %define amq_home /opt/%{amq_name}-%{amq_version}
 %define amq_etc /etc/%{amq_name}
@@ -78,7 +78,7 @@ rm -rf %{buildroot}
 install -d -m 755 %{buildroot}/%{amq_home}
 install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/*.jar   %{buildroot}/%{amq_home}/
 install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/*.txt   %{buildroot}/%{amq_home}/
-install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/*.html  %{buildroot}/%{amq_home}/
+#install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/*.html  %{buildroot}/%{amq_home}/
 install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/LICENSE %{buildroot}/%{amq_home}/
 install    -m 644 %{_builddir}/apache-%{amq_name}-%{amq_version}/NOTICE  %{buildroot}/%{amq_home}/
 
@@ -228,8 +228,8 @@ fi
 %doc %{amq_home}/LICENSE
 %doc %{amq_home}/NOTICE  
 %doc %{amq_home}/README.txt
-%doc %{amq_home}/WebConsole-README.txt
-%doc %{amq_home}/user-guide.html
+#%doc %{amq_home}/WebConsole-README.txt
+#%doc %{amq_home}/user-guide.html
 %{amq_home}/bin/*
 %{amq_home}/conf/*
 %{amq_log}
@@ -242,6 +242,8 @@ fi
 %attr(755,root,root) %{_initrddir}/%{amq_name}
 
 %changelog
+ * Wed Feb 19 2014 Nathan Milford <nathan@milford.io> [5.9.0-1]
+ - First shot with ActiveMQ 5.9.0.
  * Sat Jun 29 2013 Nathan Milford <nathan@milford.io> [5.8.0-1]
  - First shot with ActiveMQ 5.8.0.
  * Mon Oct 08 2012 Nathan Milford <nathan@milford.io> [5.7.0-1]
